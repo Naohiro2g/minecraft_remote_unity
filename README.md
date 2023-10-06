@@ -18,17 +18,17 @@ Minecraft Remote for Unity
 
 ## Script files and how to use
 
-Assetes/Scripts/
+Assetes/Scripts/  C# scripts
 
-- TCPServer.cs: C# server script
-- MinecraftRemoteReceiver.cs: C# receiver script
-- MinecraftRemoteSender.cs: C# sender script
-- send_demo_01.cs: C# sender demo script
+- TCPServer.cs: TCP server, multi-threaded, multi-client
+- MinecraftRemoteReceiver.cs: Receiver for Minecraft Remote messages
+- MinecraftRemoteSender.cs: Sender for Minecraft Remote messages
+- send_demo_01.cs: C# sender demo
 
-PythonScripts/
+PythonScripts/  Python scripts
 
-- digital_clock.py: Python client script
-- set_columns1.py: Python client script
-- set_columns2.py: Python client script
-- set_pyramids.py: Python client script
-- set_maze.py: Python client script
+- digital_clock.py:
+- set_columns1.py: builds columns
+- set_columns2.py: builds columns
+- set_pyramids.py: builds pyramids
+- set_maze.py: builds mazes
