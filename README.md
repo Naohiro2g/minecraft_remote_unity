@@ -32,3 +32,12 @@ PythonScripts/  Python scripts
 - set_columns2.py: builds columns
 - set_pyramids.py: builds pyramids
 - set_maze.py: builds mazes
+
+[<img src="./images/digitalclock.png" width="400">](./images/digitalclock.png)
+
+- [digitalclock.py](PythonScripts/digitalclock.py) to display a realtime clock with time and date using 5 x 7, LCD font in the format as follows (also shown in the picture above):
+
+```DateTime
+        2023-10-04
+         09:45:19
+```
