@@ -5,10 +5,10 @@
 print("param_UNITY loaded")
 
 # axis parameters
-AXIS_WIDTH = 100       # x, z: -100 .. 0 .. 100
-AXIS_TOP = 127
-AXIS_Y_V_ORG = 64     # y of virtual origin
-AXIS_BOTTOM = 0      # y: 0 .. 64 .. 127
+AXIS_WIDTH = 40       # x, z: -40 .. 0 .. 40
+AXIS_TOP = 40
+AXIS_Y_V_ORG = 20     # y of virtual origin
+AXIS_BOTTOM = 0      # y: 0 .. 40 .. 80
 
 # virtical levels for Uniyt
 Y_TOP = 255           # the top where blocks can be set

@@ -46,7 +46,7 @@ def main(wait=0.1):
 
     # mc.setBlocks(
     #     0, param.Y_SEA + 1, 0,
-    #     20, param.Y_SEA + 20, 20,
+    #     20, param.Y_SEA + 3, 20,
     #     param.AIR
     # )
 
@@ -57,8 +57,8 @@ def main(wait=0.1):
     # )
 
     mc.setBlocks(
-        -100, param.Y_SEA, -100,
-        100, param.Y_SEA, 100,
+        -20, param.Y_SEA, -20,
+        20, param.Y_SEA, 20,
         param.GRASS_BLOCK
     )
 

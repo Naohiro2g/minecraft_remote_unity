@@ -3,63 +3,38 @@ using UnityEngine;
 
 public class send_demo_01 : MonoBehaviour {
 
-    public MinecraftRemoteSender mc;
-    // Start is called before the first frame update
-    void Start() {
-        // 同じオブジェクトにアタッチされたTCPServer.csを取得する。
-        mc = GetComponent<MinecraftRemoteSender>();
-
-        Invoke("Connect", 1.0f);  // サーバーが立ち上がるまで待つ
-
-    }
-
-    private void Connect() {
-        // サーバーに接続を試み、できなかったら終了。
-        if (mc.ConnectServer() == -1) {
-            print("Couldn't connect to the server, good-bye.");
-        } else {
-            // Invoke("Main", 2.0f);
-            StartCoroutine(Main());
-        }
-    }
-
     private IEnumerator Main() {
-        yield return new WaitForSeconds(2);  // 2秒間待つ
+        yield return new WaitForSeconds(2);  // 2 seconds wait
 
         int x, y, z;
 
-        // mc.SetBlocks(5, 5, 5, 10, 10, 10, "gold_block");
-        mc.PostToChat("Hello, Unity!");
-
+        mc.PostToChat("Hello, Unity! (demo_01.cs)");
 
         for (x=0; x<5; x++) {
             for (y=0; y<5; y++) {
                 for (z=0; z<5; z++) {
-                    mc.SetBlock(x, y, z, "gold_block");
-                    // 10フレーム待つ
+                    mc.SetBlock(x, y, z, param.IRON_BLOCK);
+                    // 10 frames wait
                     for (var i = 0; i < 10; i++) {yield return null;}
                 }
             }
         }
 
-        for (var i = 0; i < 120; i++) {yield return null;}
+        for (var i = 0; i <  60; i++) {yield return null;}
 
         for (x=-5; x<0; x++) {
             for (y=0; y<5; y++) {
                 for (z=-5; z<0; z++) {
-                    mc.SetBlock(x, y, z, "iron_block");
-                    yield return new WaitForSeconds(0.01f);
+                    mc.SetBlock(x, y, z, param.GOLD_BLOCK);
+                    yield return new WaitForEndOfFrame();
                 }
             }
         }
 
+        yield return new WaitForSeconds(2.5f);
 
-        mc.SetBlocks(5, 5, -5, 10, 10, -10, "sea_lantern");
-
-        yield return new WaitForSeconds(2.5f);  // 2.5秒間待つ
-
-        int size = 19;
-        string blockTypeId = "gold_block";
+        int size = 15;
+        string blockTypeId = param.GOLD_BLOCK;
         x = 10;
         y = 0;
         z = 0;
@@ -69,12 +44,32 @@ public class send_demo_01 : MonoBehaviour {
             z += 1;
             size -= 2;
             y += 1;
-            for (var i = 0; i < 10; i++) {yield return null;}
+            yield return new WaitForSeconds(2.0f);
         }
 
-        mc.PostToChat("good-bye!");
-    }
+        mc.PostToChat("good-bye! (demo_01.cs)");
+    }  // end of Main()
+// ======================================================================
+    public MinecraftRemoteSender mc;
+    // Start is called before the first frame update
+    void Start() {
+        // 自分がアタッチされているのと違うオブジェクトServerにアタッチされた、TCPServer.csを取得する。
+        // 同じオブジェクトの場合は、Findしなくて良いので、
+        // mc = GetComponent<MinecraftRemoteSender>();
+        mc = GameObject.Find("Server").GetComponent<MinecraftRemoteSender>();
 
+        // サーバーが立ち上がるまで待ってから接続。
+        Invoke(nameof(Connect), 1.5f);
+    }
+    private void Connect() {
+        // サーバーに接続を試み、できなかったら終了。
+        if (mc.ConnectServer() == -1) {
+            print("Couldn't connect to the server, good-bye.");
+        } else {
+            // Run Main()
+            StartCoroutine(Main());
+        }
+    }
     // Update is called once per frame
     // void Update()
     // {
