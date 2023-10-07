@@ -27,13 +27,15 @@ public class TCPServer : MonoBehaviour {
         print("Server is listening at: " + ip + ":" + serverPortNumber);
 
         server = new TcpListener(ip, serverPortNumber);
-        server.Start();  // サーバー開始
+        try {
+            server.Start();// サーバー開始
+        } catch (Exception e) {
+            print("Server is not responding. ip:" + ip + ", port:" + serverPortNumber + e.Message);
+            return;
+        }
 
         // コールバックを設定して、接続を待つ
         server.BeginAcceptTcpClient(new AsyncCallback(DoAcceptTcpClientCallback), server);
-
-        // 送信clientをサーバーに接続
-        // ConnectServer();
     }
 
     private void DoAcceptTcpClientCallback(IAsyncResult ar) {
@@ -119,7 +121,6 @@ public class TCPServer : MonoBehaviour {
     protected virtual void OnApplicationQuit() {
         if (server != null) { server.Stop(); }  // サーバーを停止
         if (client != null) { client.Close(); }  // クライアントを停止
-        CancelInvoke();
     }
 
     // Update is called once per frame
